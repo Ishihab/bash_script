@@ -1,0 +1,40 @@
+#rename.lib
+std_msg="About to rename some files ...."
+user_decision=y
+rename()
+{
+	# expacts to be called as: rename .txt .bak
+	from=$1
+	to=$2
+	echo -e "\e[32mfiles bellow will be renamed\e[0m"
+    	shopt -s nullglob
+    	files=(*"$from")
+    	file_num=${#files[@]}
+
+    	if [ "$file_num" -eq 0 ]; then
+        	echo -e  "\e[31mno such file exist, exiting......\e[0m"
+        	return 1
+    	fi
+	for i in *$from
+	do
+		echo -e "\e[34m$i\e[0m"
+	done
+        read -p "do you want to proceed? y/n: " user_decision
+
+	if [ "$user_decision" = "y" ]; then
+	
+		for i in *$from
+		do
+			j=`basename "$i" "$from"`
+			echo -e "\e[32mrenaming $i to ${j}$to ...........\e[0m"
+			mv "$i" "${j}"$to
+			echo "Done"
+		done
+	elif [ "$user_decision" = "n" ]; then
+		echo -e "\e[31mcancelling operation ............\e[0m"
+	else
+		echo -e "\e[31mNo input from user, cancelling operation ............\e[0m"
+
+		
+	fi
+}

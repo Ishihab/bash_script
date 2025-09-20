@@ -1,0 +1,26 @@
+#!/bin/bash
+# rename file extention
+. .
+
+if [ "$#" -lt "2" ]; then
+	echo "Plz type the file extention you want to change.(exp: .txt, .html, .js, .sh)"
+	read -p "What type of file you want to change: " from
+	read -p "What type you want to change to: " to
+elif [ "$#" -gt "2" ]; then
+	echo "expacted 2 argument, provided $#"
+	echo "exiting........."
+	exit
+else
+	from=$1
+	to=$2
+fi
+
+
+
+
+
+
+echo $std_msg
+rename $from $to
+
+
